@@ -25,7 +25,7 @@ const getUserById = (req, res) => {
 
 const createUser = (req, res) => {
   // INSERT INTO USERS FIRST AND LAST NAME
-  let sql = `INSERT INTO ?? (first_name, last_name) VALUES (null, "${req.body.first_name}","${req.body.last_name})`;
+  let sql = `INSERT INTO ?? (first_name, last_name) VALUES ("${req.body.first_name}","${req.body.last_name}")`;
   // WHAT GOES IN THE BRACKETS
   sql = mysql.format(sql, ["users"]);
 
@@ -41,7 +41,7 @@ const updateUserById = (req, res) => {
   const { body } = req;
   let sql = "UPDATE ?? SET ? WHERE ?? = ?";
   // WHAT GOES IN THE BRACKETS
-  sql = mysql.format(sql, ["user", body, "id", id]);
+  sql = mysql.format(sql, ["users", body, "id", id]);
 
   pool.query(sql, (err, results) => {
     if (err) return handleSQLError(res, err);

@@ -1,7 +1,9 @@
 const { text } = require("body-parser");
 const mysql = require("mysql");
+require("dotenv").config();
 
-// const { DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE, DB_PORT } = process.env;
+const { DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE, DB_PORT } = process.env;
+console.log(DB_HOST);
 
 class Connection {
   constructor() {
@@ -9,11 +11,11 @@ class Connection {
       console.log("creating connection...");
       this.pool = mysql.createPool({
         connectionLimit: 100,
-        host: database.cilq1tqutxtq.us-east-1.rds.amazonaws.com,
-        user: admin,
-        password: Password2,
-        database: test,
-        port: 3306,
+        host: DB_HOST,
+        user: DB_USER,
+        password: DB_PASSWORD,
+        database: DB_DATABASE,
+        port: DB_PORT,
       });
 
       return this.pool;
